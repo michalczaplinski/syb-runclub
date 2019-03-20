@@ -1,0 +1,22 @@
+{
+  "instructors": [
+    {
+      "name": "Steven McDonald",
+      "bio": "lorem ipsum",
+      "location": "New York",
+      "age": 27
+    },
+    {
+      "name": "Some other guy",
+      "bio": "lorem ipsum",
+      "location": "Nairobi",
+      "age": 30
+    },
+    {
+      "name": "Charlie blabla",
+      "bio": "lorem ipsum",
+      "location": "Philly",
+      "age": 19
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+.layout {
+  margin-top: 50px;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.layout-inner {
+  max-width: 1080px;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
