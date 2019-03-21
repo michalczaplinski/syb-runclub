@@ -1,22 +1,52 @@
 {
   "instructors": [
     {
-      "name": "Steven McDonald",
+      "name": "Steven",
       "bio": "lorem ipsum",
       "location": "New York",
       "age": 27
     },
     {
-      "name": "Some other guy",
+      "name": "Jessica",
       "bio": "lorem ipsum",
-      "location": "Nairobi",
+      "location": "New York",
       "age": 30
     },
     {
-      "name": "Charlie blabla",
+      "name": "Charlie",
       "bio": "lorem ipsum",
-      "location": "Philly",
+      "location": "New York",
       "age": 19
+    },
+    {
+      "name": "James",
+      "bio": "lorem ipsum",
+      "location": "New Jersey",
+      "age": 30
+    },
+    {
+      "name": "Kate",
+      "bio": "lorem ipsum",
+      "location": "New Jersey",
+      "age": 19
+    },
+    {
+      "name": "Michael",
+      "bio": "lorem ipsum",
+      "location": "Boston",
+      "age": 19
+    },
+    {
+      "name": "Thomas",
+      "bio": "lorem ipsum",
+      "location": "Boston",
+      "age": 19
+    },
+    {
+      "name": "Mark",
+      "bio": "lorem ipsum",
+      "location": "Boston",
+      "age": 22
     }
   ]
 }

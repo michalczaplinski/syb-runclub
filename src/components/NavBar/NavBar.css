@@ -6,3 +6,8 @@
   top: 0;
   z-index: 10;
 }
+
+.navbar-menu {
+  display: flex;
+  list-style-type: none;
+}
