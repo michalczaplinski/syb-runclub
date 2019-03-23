@@ -9,6 +9,7 @@ import About from "./pages/about";
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
 import Instructors from "./pages/instructors";
+import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
 
 class App extends Component {
   render() {
@@ -18,10 +19,11 @@ class App extends Component {
           <>
             <NavBar />
             <Layout>
-              <Route path="/" exact component={Home} />
+              <Route exact path="/" component={Home} />
               <Route path="/trainers" component={Trainers} />
               <Route path="/about" component={About} />
-              <Route path="/instructors" component={Instructors} />
+              <Route exact path="/instructors" component={Instructors} />
+              <Route path="/instructors/:slug" component={InstructorProfile} />
             </Layout>
           </>
         </Router>

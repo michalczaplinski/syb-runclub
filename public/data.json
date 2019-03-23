@@ -3,49 +3,57 @@
     {
       "name": "Steven",
       "bio": "lorem ipsum",
-      "location": "New York",
+      "slug": "Steven",
+      "region": "New York",
       "age": 27
     },
     {
       "name": "Jessica",
       "bio": "lorem ipsum",
-      "location": "New York",
+      "slug": "Jessica",
+      "region": "New York",
       "age": 30
     },
     {
       "name": "Charlie",
       "bio": "lorem ipsum",
-      "location": "New York",
+      "slug": "Charlie",
+      "region": "New York",
       "age": 19
     },
     {
       "name": "James",
       "bio": "lorem ipsum",
-      "location": "New Jersey",
+      "slug": "James",
+      "region": "New Jersey",
       "age": 30
     },
     {
       "name": "Kate",
       "bio": "lorem ipsum",
-      "location": "New Jersey",
+      "slug": "Kate",
+      "region": "New Jersey",
       "age": 19
     },
     {
       "name": "Michael",
       "bio": "lorem ipsum",
-      "location": "Boston",
+      "slug": "Michael",
+      "region": "Boston",
       "age": 19
     },
     {
       "name": "Thomas",
       "bio": "lorem ipsum",
-      "location": "Boston",
+      "slug": "Thomas",
+      "region": "Boston",
       "age": 19
     },
     {
       "name": "Mark",
       "bio": "lorem ipsum",
-      "location": "Boston",
+      "slug": "Mark",
+      "region": "Boston",
       "age": 22
     }
   ]
