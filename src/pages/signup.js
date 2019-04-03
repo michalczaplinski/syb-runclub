@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { axios, auth } from "../services";
 
 const Input = ({ errors, ...props }) => {
   return (
@@ -13,7 +14,7 @@ const Input = ({ errors, ...props }) => {
   );
 };
 
-export default function Signup() {
+export default function Signup({ history }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,12 +40,20 @@ export default function Signup() {
         e.preventDefault();
         const errors = validateForm();
         if (errors.password.length > 0) {
-          console.log(errors);
           setErrors(errors);
           return;
         }
 
-        // fetch.post(some url);
+        axios
+          .post("/signup")
+          .then(() => {
+            auth.signup(name, email, password);
+            history.push("/dashboard");
+          })
+          .catch(err => {
+            //TODO: handle error and provide error message and clear form
+            console.error(err);
+          });
       }}
     >
       <h2>Sign up</h2>

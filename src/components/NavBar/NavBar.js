@@ -13,6 +13,12 @@ const NavBar = () => {
         <ul className="navbar-link">
           <Link to="/instructors"> instructors </Link>
         </ul>
+        <ul className="navbar-link">
+          <Link to="/login"> LOGIN </Link>
+        </ul>
+        <ul className="navbar-link">
+          <Link to="/signup"> SIGN UP </Link>
+        </ul>
       </li>
     </div>
   );

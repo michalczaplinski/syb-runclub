@@ -13,12 +13,11 @@ import Instructors from "./pages/instructors";
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
 import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
+import { auth } from "./services";
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   //TODO: Add authentication logic here
-  let isAuthenticated = true;
-
-  return isAuthenticated ? (
+  return auth.isAuthenticated() ? (
     <Route {...props} component={Component} />
   ) : (
     <Redirect to="/login" />
