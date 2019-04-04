@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { axios, auth } from "../services";
+import { axiosInstance } from "../services";
 
 const Input = ({ errors, ...props }) => {
   return (
@@ -44,11 +44,15 @@ export default function Signup({ history }) {
           return;
         }
 
-        axios
-          .post("/signup")
-          .then(() => {
-            auth.signup(name, email, password);
-            history.push("/dashboard");
+        axiosInstance
+          .post("/api/users", {
+            name,
+            email,
+            password,
+            account_type: "1"
+          })
+          .then(res => {
+            history.push("/profile", { id: res.data.id });
           })
           .catch(err => {
             //TODO: handle error and provide error message and clear form

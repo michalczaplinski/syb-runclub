@@ -1,48 +1,38 @@
-// import axios from "axios";
+import ax from "axios";
 
-export const axios = {
-  post() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), 1000);
-    });
-  },
+export const axiosInstance = ax.create({
+  baseURL: `http://localhost:3000`
+});
 
-  get() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), 1000);
-    });
-  }
-};
+// export const auth = {
+//   signup(name, email, password) {
+//     localStorage.setItem("name", name);
+//     localStorage.setItem("email", email);
+//     localStorage.setItem("password", password);
+//   },
 
-export const auth = {
-  signup(name, email, password) {
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
-  },
+// login(email, password) {
+//   const storedEmail = localStorage.getItem("email");
+//   const storedPassword = localStorage.getItem("password");
 
-  login(email, password) {
-    const storedEmail = localStorage.getItem("email");
-    const storedPassword = localStorage.getItem("password");
+//   if (email === storedEmail && storedPassword === password) {
+//     return true;
+//   }
+// },
 
-    if (email === storedEmail && storedPassword === password) {
-      return true;
-    }
-  },
+//   logout() {
+//     localStorage.removeItem("name");
+//     localStorage.removeItem("email");
+//     localStorage.removeItem("password");
+//   },
 
-  logout() {
-    localStorage.removeItem("name");
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
-  },
-
-  isAuthenticated() {
-    if (localStorage.getItem("email") && localStorage.getItem("password")) {
-      return true;
-    }
-    return false;
-  }
-};
+//   isAuthenticated() {
+//     if (localStorage.getItem("email") && localStorage.getItem("password")) {
+//       return true;
+//     }
+//     return false;
+//   }
+// };
 
 // export const authAwareFetch = () => {
 //   this.headers = {}

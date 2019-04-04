@@ -1,5 +1,10 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from "react-router-dom";
 
 import "./App.css";
 
@@ -9,42 +14,44 @@ import Signup from "./pages/signup";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Instructors from "./pages/instructors";
+import Profile from "./pages/profile";
 
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
 import InstructorProfile from "./components/InstructorProfile/InstructorProfile";
-import { auth } from "./services";
 
 const PrivateRoute = ({ component: Component, ...props }) => {
-  //TODO: Add authentication logic here
-  return auth.isAuthenticated() ? (
+  const token = localStorage.getItem("access_token");
+  const expiresAt = parseInt(localStorage.getItem("token_expires_at"));
+  const currentTime = Math.round(new Date().getTime() / 1000);
+
+  return token && expiresAt > currentTime ? (
     <Route {...props} component={Component} />
   ) : (
     <Redirect to="/login" />
   );
 };
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Router>
-          <>
-            <NavBar />
-            <Layout>
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route exact path="/instructors" component={Instructors} />
-              <Route path="/instructors/:slug" component={InstructorProfile} />
-              <PrivateRoute path="/dashboard" component={Dashboard} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-            </Layout>
-          </>
-        </Router>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <Router>
+      <>
+        <NavBar />
+        <Layout>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route exact path="/instructors" component={Instructors} />
+            <Route path="/instructors/:slug" component={InstructorProfile} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/profile" component={Profile} />
+          </Switch>
+        </Layout>
+      </>
+    </Router>
+  </div>
+);
 
 export default App;

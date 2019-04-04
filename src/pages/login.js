@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { axios, auth } from "../services";
+import { axiosInstance } from "../services";
 
 // TODO: put Input component in a new file
 const Input = ({ ...props }) => {
@@ -19,13 +19,21 @@ export default function Login({ history }) {
       onSubmit={e => {
         e.preventDefault();
 
-        axios
-          .post("/login", { email, password })
+        axiosInstance
+          .post("/oauth/token", { email, password, grant_type: "password" })
           .then(res => {
-            // const { sessionId } = res.data;
-            // TODO: set the header on axios instance for every subsequent request
-            // auth.login();
-            // history.push("/dashboard");
+            localStorage.setItem("access_token", res.data.access_token);
+            localStorage.setItem("refresh_token", res.data.refresh_token);
+
+            localStorage.setItem(
+              "token_expires_at",
+              res.data.expires_in + Math.round(new Date().getTime() / 1000)
+            );
+
+            axiosInstance.defaults.headers.common["Authorization"] =
+              res.data.access_token;
+
+            history.push("/dashboard");
           })
           .catch(err => {
             console.error(err);
