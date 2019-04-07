@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { axiosInstance } from "../services";
 
+import { connect } from "react-redux";
+
 // TODO: put Input component in a new file
 const Input = ({ ...props }) => {
   return (
@@ -10,7 +12,7 @@ const Input = ({ ...props }) => {
   );
 };
 
-export default function Login({ history }) {
+function Login({ history, dispatch }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,6 +34,11 @@ export default function Login({ history }) {
 
             axiosInstance.defaults.headers.common["Authorization"] =
               res.data.access_token;
+
+            dispatch({
+              type: "SET_ACCESS_TOKEN",
+              accessToken: res.data.access_token
+            });
 
             history.push("/dashboard");
           })
@@ -59,3 +66,5 @@ export default function Login({ history }) {
     </form>
   );
 }
+
+export default connect()(Login);

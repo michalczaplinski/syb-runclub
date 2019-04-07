@@ -5,6 +5,8 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 import "./App.css";
 
@@ -32,10 +34,27 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   );
 };
 
+function reducer(state = {}, action) {
+  switch (action.type) {
+    case "SET_ACCESS_TOKEN":
+      return {
+        ...state,
+        userId: action.accessToken
+      };
+    default:
+      return state;
+  }
+}
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 const App = () => (
   <div className="App">
     <Router>
-      <>
+      <Provider store={store}>
         <NavBar />
         <Layout>
           <Switch>
@@ -49,7 +68,7 @@ const App = () => (
             <Route path="/profile" component={Profile} />
           </Switch>
         </Layout>
-      </>
+      </Provider>
     </Router>
   </div>
 );
