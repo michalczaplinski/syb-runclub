@@ -17,6 +17,7 @@ import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Instructors from "./pages/instructors";
 import Profile from "./pages/profile";
+import Workouts from "./pages/workouts";
 
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/Layout/Layout";
@@ -66,6 +67,7 @@ const App = () => (
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/profile" component={Profile} />
+            <Route path="/workouts" component={Workouts} />
           </Switch>
         </Layout>
       </Provider>
