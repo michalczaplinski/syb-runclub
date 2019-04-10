@@ -3,6 +3,7 @@ import { axiosInstance } from "../services";
 import styled from "styled-components";
 import { DateTime } from "luxon";
 import map from "lodash.map";
+import { Portal } from "react-portal";
 
 import ListFilter from "../components/ListFilter/ListFilter";
 
@@ -28,9 +29,27 @@ const CalendarItem = styled.div`
   border: 1px solid black;
 `;
 
-const Workouts = () => {
+const ModalContainer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 100;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+`;
+
+const Workouts = ({ history }) => {
   const [workouts, setWorkouts] = useState([]);
   const [workoutFilter, setWorkoutFilter] = useState("");
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
   useEffect(() => {
     axiosInstance
@@ -67,6 +86,35 @@ const Workouts = () => {
     .flat();
 
   const allWorkoutTitles = map(workouts, "name");
+  const currentWorkout = workouts.filter(workout => {
+    if (workoutFilter === "") return true;
+    return workout.name === workoutFilter;
+  });
+
+  const confirmBooking = schedule => {
+    const booking = {
+      status: "confirmed",
+      title: "booking",
+      cost: currentWorkout.cost,
+      start: schedule.start,
+      cancellation_reason: null,
+      refunded: null,
+      instructor_id: schedule.instructor_id,
+      schedule_id: schedule.id,
+      client_id: 1 //TODO: not hardcode the client_id (pass it to the browser)
+    };
+
+    axiosInstance
+      .post("/api/bookings", booking)
+      .then(res => {
+        console.log(res.data);
+        setConfirmModalOpen(false);
+        history.push("/dashboard");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   return (
     <div>
@@ -107,7 +155,35 @@ const Workouts = () => {
                   return (
                     <div>
                       {schedule.title}
-                      <button> BOOK </button>
+                      <button
+                        onClick={() => {
+                          setConfirmModalOpen(true);
+                        }}
+                      >
+                        BOOK
+                      </button>
+                      {confirmModalOpen && (
+                        <Portal>
+                          <ModalContainer>
+                            <ModalContent>
+                              <button
+                                onClick={() => setConfirmModalOpen(false)}
+                              >
+                                X
+                              </button>
+                              <div> Do you want to create this booking? </div>
+                              <button onClick={() => confirmBooking(schedule)}>
+                                yes
+                              </button>
+                              <button
+                                onClick={() => setConfirmModalOpen(false)}
+                              >
+                                no
+                              </button>
+                            </ModalContent>
+                          </ModalContainer>
+                        </Portal>
+                      )}
                     </div>
                   );
                 })}

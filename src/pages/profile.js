@@ -4,7 +4,8 @@ import { axiosInstance } from "../services";
 const Profile = ({
   location: {
     state: { id }
-  }
+  },
+  history
 }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setlastName] = useState("");
@@ -17,17 +18,17 @@ const Profile = ({
       <form
         onSubmit={e => {
           e.preventDefault();
-
           axiosInstance
             .post("/api/clients", {
               first_name: firstName,
               last_name: lastName,
               phone,
               instagram,
-              account_id: 1 //TODO: add a real account id passed from previous route
+              user_id: id
             })
             .then(res => {
               console.log(res);
+              history.push("/dashboard");
             })
             .catch(err => {
               console.error(err);
